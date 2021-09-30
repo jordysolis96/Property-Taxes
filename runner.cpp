@@ -15,27 +15,29 @@ enum Property
 
 void app()
 {
-    cout << "Enter your name: " << endl;
-    getline(cin, str);
+     cout<<"Enter your name: "<<endl;
+        getline(cin,str);
+
+
+                for(int i=0;i<str.length();++i)
+                {
+
+                        if(isalpha(str[i]) == true)
+                        {
+                        cout<< "Welcome " + str<<endl;
+                        break;
+                        }           
+                        else
+                        {
+                                cout<<"Your name can only have alphabets or spaces. Enter again."<<endl;
+                                app();
+                        }
+}
 }
 
-void getAccNum()
-{
-    cout << "Enter your account number: " << endl;
-    cin >> ACCOUNT_LENGTH;
-    if (ACCOUNT_LENGTH > 6)
-    { //this only checks if value is greater than 6 but needs to be set to check length rather than value
-        getAccNum();
-    }
-    else
-    {
-        cout << "thank you" << endl;
-    }
+int main(){
+        app();
+        cout << "next method call goes here" << endl;
+        return 0;
 }
 
-int main()
-{
-    app();
-    getAccNum();
-    cout << ACCOUNT_LENGTH << endl;
-}
