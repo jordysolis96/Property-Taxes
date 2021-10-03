@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+#include <ctime>
 
 using namespace std;
 
@@ -10,12 +11,21 @@ string str;
 int input;
 bool alphaNum;
 bool valid;
+int process;
+double value;
+double comTax;
+double resTax;
+double calcResTax;
 
 enum Property
 {
         Commercial = 1,
-        Residual = 2
+        Residential = 2
 };
+
+Property property;
+
+
 
 
 int main()
@@ -71,5 +81,55 @@ int main()
 
         }while (accountNumber.size() != ACCOUNT_LENGTH || alphaNum == false);
         cout << "next method call goes here" << endl;
+
+        cout << "How many properties do you want to process?"<< endl;
+        cin>>process;
+        while(process<0)
+        {
+                cout<<"You cannot enter a negative value. Enter again."<<endl;
+                cout<<"How many properties do you want to process?"<<endl;
+                cin>>process;
+        }
+
+        for(int i=1;i<=process;i++)
+        {
+                cout<<"Processing property#"<<i<<endl;
+                cout<<"1.Commercial"<<endl<<"2.Residential"<<endl;
+                cout<<"Enter property type: "; cin>>i;
+                cout<<"Enter property value: "; cin>>value;
+        }
+
+        switch(property)
+        {
+                case Commercial:
+                if(value<1000000)
+                {
+                       comTax =value * 0.035;
+                }
+                else if(value>=1000000)
+                {
+                        value=10000000.035+(value-1000000)*0.05;
+                }
+                break;
+                case Residential:
+                if(value<100000)
+                {
+                cout << "There is no tac on residual property below 100,000 dollars" << endl;           
+                //        comTax = value * 0;
+                }
+                else if (value>=100000)
+                {
+                        resTax = value - 100000;
+                        calcResTax = resTax * .035;
+                        if(process==1)
+                        {
+                                srand(time(NULL));
+                                resTax-=rand()%1001+1000;
+                        }
+                }
+                break;
+              
+        }
+
         return 0;
 }
